@@ -8,6 +8,8 @@ class project():
     selectedMovie = "x"
     age = "x"
     amount="x"
+    key = [0]
+    count = 0
 
     def __init__(self, master, a):
         self.root = master
@@ -68,15 +70,11 @@ class project():
         label = Label(movie, text="MOVIES AVAILABEL", fg="black", font=('arial', 20, "bold"))
         label.grid(row=0, column=1)
         # spinbox1=Spinbox(root,from_=5,to=10,state=NORMAL).pack()
-        for key in films:
-            filmName = key
-            self.check[key] = Label(movie, text=filmName, font=("arial", 10, "italic")).grid(row=1, column=0, sticky=W)
-            pass
-        # self.check2 = Label(movie, text="Ant-man ", font=("arial", 10, "italic")).grid(row=2, column=0, sticky=W)
-        # self.check3 = Label(movie, text="Deadpool", font=("arial", 10, "italic")).grid(row=3, column=0, sticky=W)
-        # self.check4 = Label(movie, text="Infinity war", font=("arial", 10, "italic")).grid(row=4, column=0, sticky=W)
-        # self.check5 = Label(movie, text="Strager thing", font=("arial", 10, "italic")).grid(row=5, column=0, sticky=W)
-        # self.check6 = Label(movie, text="Game of throns", font=("arial", 10, "italic")).grid(row=6, column=0, sticky=W)
+        count = 0
+        for keys in films:
+            self.count = Label(movie, text=keys, font=("arial", 10, "italic")).grid(row=count, column=0, sticky=W)
+            count = count+1
+
         self.label = Label(movie, text="Enter movie name").grid(row=8, column=0)
         self.entry = Entry(movie)
         self.entry.grid(row=9, column=0)
