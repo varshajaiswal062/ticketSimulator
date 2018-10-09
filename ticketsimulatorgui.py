@@ -11,6 +11,14 @@ class project():
     key = [0]
     count = 0
 
+    films = {"Race": [12, 25, 200],
+             "Ant-Man": [16, 25, 300],
+             "Deadpool": [18, 18, 180],
+             "Infinity-War": [12, 29, 400],
+             "Stranger Things 3": [3, 10, 350],
+             "Game of thorns": [18, 10, 350],
+             }
+
     def __init__(self, master, a):
         self.root = master
         self.e = a
@@ -59,19 +67,13 @@ class project():
         movie = Tk()
         movie.title("Ticket Simulator")
         movie.geometry('500x400')
-        films = {"Race": [12, 25, 200],
-                 "Ant-Man": [16, 25, 300],
-                 "Deadpool": [18, 18, 180],
-                 "Infinity-War": [12, 29, 400],
-                 "Stranger Things 3": [3, 10, 350],
-                 "Game of thorns": [18, 10, 350],
-                 }
+
 
         label = Label(movie, text="MOVIES AVAILABEL", fg="black", font=('arial', 20, "bold"))
         label.grid(row=0, column=1)
         # spinbox1=Spinbox(root,from_=5,to=10,state=NORMAL).pack()
         count = 0
-        for keys in films:
+        for keys in self.films:
             self.count = Label(movie, text=keys, font=("arial", 10, "italic")).grid(row=count, column=0, sticky=W)
             count = count+1
 
@@ -82,16 +84,10 @@ class project():
         movie.mainloop()
 
     def processTicketBooking(self):
-        films = {"Race": [12, 25, 200],
-                 "Ant-Man": [16, 25, 300],
-                 "Deadpool": [18, 18, 180],
-                 "Infinity-War": [12, 29, 400],
-                 "Stranger Things 3": [3, 10, 350],
-                 "Game of thorns": [18, 10, 350],
-                 }
+
         selectedMovie = self.entry.get()
         self.selectedMovie = selectedMovie.strip().title()
-        if selectedMovie.strip().title() in films:
+        if selectedMovie.strip().title() in self.films:
             authority = Tk()
             authority.geometry("200x100")
             self.label = Label(authority, text="Enter your age: ").grid(row=0, column=0)
@@ -100,18 +96,13 @@ class project():
             self.button = Button(authority, text="Submit", command=self.agevarify).grid(row=1, column=1)
             authority.mainloop()
 
+
     def agevarify(self):
-        films = {"Race": [12, 25, 200],
-                 "Ant-Man": [16, 25, 300],
-                 "Deadpool": [18, 18, 180],
-                 "Infinity-War": [12, 29, 400],
-                 "Stranger Things 3": [3, 10, 350],
-                 "Game of thorns": [18, 10, 350],
-                 }
+
         age = self.ageentry.get()
-        if getint(age) >= getint(films[self.selectedMovie.strip().title()][0]):
+        if getint(age) >= getint(self.films[self.selectedMovie.strip().title()][0]):
             answer=tkinter.messagebox.askyesno(title="Procced", message="Do you want proceed further to buy tkickets")
-            print("Great,  price of a ticket is {}  .".format(films[self.selectedMovie.strip().title()][2]))
+            print("Great,  price of a ticket is {}  .".format(self.films[self.selectedMovie.strip().title()][2]))
             # proceeding further for purchasing
 
         if answer:
@@ -125,25 +116,31 @@ class project():
             # amount = self.entry.get()
             # print(amount)
             procced2.mainloop()
+
+    def addUser(self):
+        addUser= Tk()
+        addUser.geometry("400*400")
+        label = Label(addUser, Text="Enter user name").grid(row=1,column=0)
+        entry1 = Entry(addUser).grid(row=2,column=0)
+        label2 = Label(addUser, Text="Enter user name").grid(row=2,column=0)
+        entry2 = Entry(addUser).grid(row=2,column=0)
+
+        btn = Button(addUser ,Text="Add user").grid(row=3,column=1)
+
+
     def info(self):
-        films = {"Race": [12, 25, 200],
-                 "Ant-Man": [16, 25, 300],
-                 "Deadpool": [18, 18, 180],
-                 "Infinity-War": [12, 29, 400],
-                 "Stranger Things 3": [3, 10, 350],
-                 "Game of thorns": [18, 10, 350],
-                 }
+
         info=Tk()
         # infoText = "Your total bill of tickets {} is {}".format()
         amount=self.entry.get()
-        if getint(amount) <= getint(films[self.selectedMovie.strip().title()][1]):
+        if getint(amount) <= getint(self.films[self.selectedMovie.strip().title()][1]):
                 # calculating total amount of bill
-                billAmount = getint(amount) * getint(films[self.selectedMovie.strip().title()][2])
+                billAmount = getint(amount) * getint(self.films[self.selectedMovie.strip().title()][2])
                 print("Your total bill for {} thickets is {}".format(amount, billAmount))
 
                 # If ticket are less available tickets
-        elif amount > films[self.selectedMovie.strip().title()][1]:
-                print("Sorry we have only {} tickets available".format(films[self.selectedMovie.strip().title()][1]))
+        elif amount > self.films[self.selectedMovie.strip().title()][1]:
+                print("Sorry we have only {} tickets available".format(self.films[self.selectedMovie.strip().title()][1]))
         infoText = "Your total bill of tickets {} is {}".format(amount, billAmount)
         label = Label(info, text=infoText).grid(row=0, column=0)
         info.mainloop()
